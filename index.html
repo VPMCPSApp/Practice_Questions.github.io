@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Practice Questions</title>
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+</head>
+<body background="bg.jpg" text="black"> 
+    <center><font face = "Arial Black" size = "5"><b><i><h1>Multiple Choice Questions</h1></h1></i></b></font></center>
+    <font size = "6"><py-script> 
+        
+        from js import document
+        from pyodide import create_proxy
+        import os
+
+        math_data = [
+        {
+            "Q.": "From a point 50 m above the ground, the angle of elevation of a cloud is 30∘ and the angle of depression of its reflection in the water is 60∘. Find the height of the cloud above the ground.",
+            "Ans.": "1) 58.67m    2) 66.67m    3) 65.68m    4) None of these",
+            "Co_ans.": "2"
+        },
+        {
+            "Q.": "The length of parallel sides of a trapezium are (x+8)cm and (2x+3)cm, and the distance between them is (x+4)cm. If its area is 590cm square, find the value of x.",
+            "Ans.": "1) 16cm   2) 25cm    3) 24cm    4) 12cm",
+            "Co_ans.": "1"
+        },
+        {
+            "Q.": "sinA(1 + tanA) + cosA(1 + cotA) = ?",
+            "Ans.": "1) 1   2) secA-cosecA    3) cosecA-secA    4) cosecA + secA",
+            "Co_ans.": "4"
+        }
+        ]
+
+    
+        import random
+        import time
+        
+        
+            
+        t = 5
+        time.sleep(0.3)
+        correct = 0
+        attempted = 1
+
+        set = random.choice(math_data)
+        q = set["Q."]
+        a = set["Ans."]
+        print("Q." + q)
+        print(a)
+        print("What is the correct answer? 1,2,3 or 4-")
+
+        def maths(e):
+            a = 1
+            while a == 1:
+                inp = Element('guess').element
+                choice = int(inp.value)
+                inp.value = "" 
+                co = int(set["Co_ans."])
+                
+                if choice == co:
+                    pyscript.write("result", "That's the right answer!")
+                else:                   
+                    pyscript.write("result", f"Sorry, the answer is incorrect, It is {co}")
+                    a = 2
+                    
+                
+                
+
+        maths_proxy = create_proxy(maths)
+        Ans_button = document.getElementById("ansBtn")
+        Ans_button.addEventListener("click", maths_proxy)
+
+    
+    </py-script></font>
+    
+    <input type="text" id="guess" name="guess" /> <br /><br />
+    <input type="button" id="ansBtn" value="Confirm Answer" />
+    <font size = "6">
+    <p id="result"></p><br /><br />
+    </font>
+   
+</body>
+</html>
+    
